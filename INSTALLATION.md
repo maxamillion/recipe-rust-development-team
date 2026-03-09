@@ -25,7 +25,7 @@
 ### Option 1: Clone this Repository
 
 ```bash
-git clone <repository-url> rust-development-team
+git clone https://github.com/YOUR_USERNAME/recipe-rust-development-team.git rust-development-team
 cd rust-development-team
 ```
 
@@ -34,7 +34,7 @@ cd rust-development-team
 ```bash
 mkdir -p ~/.goose/recipes
 cd ~/.goose/recipes
-curl -O https://raw.githubusercontent.com/<user>/<repo>/main/rust-development-team.yaml
+curl -O https://raw.githubusercontent.com/YOUR_USERNAME/recipe-rust-development-team/main/rust-development-team.yaml
 ```
 
 ### Option 3: Manual Installation

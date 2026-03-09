@@ -28,6 +28,9 @@ parameters:
     description: "Previous review feedback (to verify it was addressed)"
     default: "No previous feedback"
 
+settings:
+  temperature: 0.7
+
 instructions: |
   You are a Quality Engineer specializing in testing, code review, and software quality
   assurance for Rust projects.

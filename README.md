@@ -2,15 +2,6 @@
 
 A Goose Recipe that implements a multi-agent workflow for professional Rust software development.
 
-## Two Versions Available
-
-This project provides **two implementations** of the same workflow:
-
-1. **Monolithic** (`rust-development-team.yaml`) - All-in-one recipe, single file
-2. **Modular** (`rust-development-team-modular.yaml`) - Coordinator + reusable persona sub-recipes
-
-See [MODULAR_ARCHITECTURE.md](MODULAR_ARCHITECTURE.md) for detailed comparison and usage.
-
 ## Overview
 
 This recipe coordinates three specialized AI personas working together to deliver high-quality Rust code:
@@ -65,55 +56,19 @@ This recipe coordinates three specialized AI personas working together to delive
                    └──────────┘
 ```
 
-## Which Version to Use?
+## Quick Start
 
-### Monolithic (`rust-development-team.yaml`)
-
-**Best for:**
-- Quick, straightforward tasks
-- Single-file deployment
-- Environments where sub-recipes aren't supported
-- Getting started quickly
-
-**Pros:** Simple, self-contained, no dependencies
-
-**Cons:** Not reusable, harder to customize
-
-### Modular (`rust-development-team-modular.yaml`)
-
-**Best for:**
-- Reusing personas across projects
-- Customizing individual personas
-- Building persona libraries
-- Advanced workflows
-
-**Pros:** Reusable components, easier to maintain, extensible
-
-**Cons:** More files, requires sub-recipe support
-
-### Quick Start
-
-**Try the monolithic version first:**
 ```bash
 goose run rust-development-team.yaml \
   --param task="Create a simple calculator struct"
 ```
 
-**Then explore the modular version** for advanced use cases.
-
 ## Usage
 
-### Basic Usage (Monolithic)
+### Basic Usage
 
 ```bash
 goose run rust-development-team.yaml \
-  --param task="Create a thread-safe cache with TTL support"
-```
-
-### Basic Usage (Modular)
-
-```bash
-goose run rust-development-team-modular.yaml \
   --param task="Create a thread-safe cache with TTL support"
 ```
 
@@ -133,7 +88,17 @@ goose run rust-development-team.yaml \
   --param max_review_cycles=5
 ```
 
-### Using Individual Personas (Modular Only)
+## Parameters
+
+| Parameter | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| `task` | string | Yes | - | The Rust development task to complete |
+| `requirements` | string | No | "Follow Rust best practices..." | Specific requirements or constraints |
+| `max_review_cycles` | number | No | 10 | Maximum developer/QE feedback iterations (1-10) |
+
+## Using Individual Personas
+
+Each persona is also available as a standalone recipe for focused tasks:
 
 ```bash
 # Just get architectural design
@@ -146,13 +111,7 @@ goose run personas/quality-engineer.yaml \
   --param implementation="$(cat src/lib.rs)"
 ```
 
-## Parameters
-
-| Parameter | Type | Required | Default | Description |
-|-----------|------|----------|---------|-------------|
-| `task` | string | Yes | - | The Rust development task to complete |
-| `requirements` | string | No | "Follow Rust best practices..." | Specific requirements or constraints |
-| `max_review_cycles` | number | No | 10 | Maximum developer/QE feedback iterations (1-10) |
+See [STANDALONE_PERSONAS.md](STANDALONE_PERSONAS.md) for complete details on using personas independently.
 
 ## What Gets Delivered
 
@@ -168,14 +127,14 @@ At the end of the workflow, you'll receive:
 
 The Quality Engineer ensures:
 
-- ✅ Code compiles without warnings
-- ✅ All tests pass
-- ✅ Follows Rust idioms and best practices
-- ✅ Proper error handling with Result types
-- ✅ Memory safety (minimal/no unsafe code)
-- ✅ Thread safety where applicable
-- ✅ Good test coverage including edge cases
-- ✅ Clear documentation
+- Code compiles without warnings
+- All tests pass
+- Follows Rust idioms and best practices
+- Proper error handling with Result types
+- Memory safety (minimal/no unsafe code)
+- Thread safety where applicable
+- Good test coverage including edge cases
+- Clear documentation
 
 ## Example Tasks
 
@@ -187,6 +146,24 @@ This recipe works well for:
 - **System utilities**: "Write a file watcher with notification support"
 - **API clients**: "Build a REST API client with async support"
 - **Algorithms**: "Implement a B-tree with insertion and deletion"
+
+## File Structure
+
+```
+recipe-rust-development-team/
+├── rust-development-team.yaml       # Main recipe (full workflow)
+├── personas/
+│   ├── architect.yaml               # Standalone architect persona
+│   ├── rust-developer.yaml          # Standalone developer persona
+│   └── quality-engineer.yaml        # Standalone QE persona
+├── README.md
+├── INSTALLATION.md
+├── CUSTOMIZATION.md
+├── STANDALONE_PERSONAS.md
+├── QUICK_REFERENCE.md
+└── examples/
+    └── EXAMPLE_SESSION.md
+```
 
 ## Tips
 
@@ -225,33 +202,6 @@ The recipe works well alongside:
 
 **Architecture phase too brief**: Make your task description more detailed and specific.
 
-## Modular Architecture
-
-The modular version provides reusable persona recipes:
-
-```
-personas/
-├── architect.yaml         # Standalone architect persona
-├── rust-developer.yaml    # Standalone developer persona
-└── quality-engineer.yaml  # Standalone QE persona
-```
-
-**Benefits:**
-- Use personas independently or together
-- Customize individual personas without affecting others
-- Share personas across different projects
-- Mix and match with your own personas
-
-**Example - Custom QE:**
-```bash
-# Copy and customize the QE persona
-cp personas/quality-engineer.yaml personas/security-focused-qe.yaml
-# Edit to add security-specific checks
-# Update coordinator to use your custom version
-```
-
-See [MODULAR_ARCHITECTURE.md](MODULAR_ARCHITECTURE.md) for complete details.
-
 ## License
 
 This recipe is provided as-is for use with Goose.
@@ -261,6 +211,5 @@ This recipe is provided as-is for use with Goose.
 Feedback and improvements welcome! This recipe can be extended with:
 
 - Additional personas (e.g., Security Reviewer, Performance Engineer)
-- Integration with Rust-specific MCP extensions
 - Customizable quality standards
 - Project template support

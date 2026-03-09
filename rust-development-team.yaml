@@ -30,6 +30,7 @@ parameters:
 
 settings:
   max_turns: 100
+  temperature: 0.7
 
 instructions: |
   You are coordinating a professional Rust development team with three specialized personas. You will

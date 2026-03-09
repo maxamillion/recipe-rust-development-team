@@ -16,6 +16,9 @@ parameters:
     description: "Specific requirements or constraints"
     default: "Follow Rust best practices and idiomatic patterns"
 
+settings:
+  temperature: 0.7
+
 instructions: |
   You are a Lead Architect with deep expertise in systems design, software architecture,
   and Rust ecosystem knowledge.

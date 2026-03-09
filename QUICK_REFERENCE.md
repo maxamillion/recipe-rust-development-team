@@ -114,14 +114,19 @@ export OPENAI_API_KEY=your_key
 ## File Structure
 
 ```
-rust-development-team/
-├── rust-development-team.yaml    # Main recipe
-├── README.md                      # Full documentation
-├── INSTALLATION.md                # Setup guide
-├── CUSTOMIZATION.md               # How to modify
-├── QUICK_REFERENCE.md            # This file
+recipe-rust-development-team/
+├── rust-development-team.yaml       # Main recipe (full workflow)
+├── personas/
+│   ├── architect.yaml               # Standalone architect persona
+│   ├── rust-developer.yaml          # Standalone developer persona
+│   └── quality-engineer.yaml        # Standalone QE persona
+├── README.md                        # Full documentation
+├── INSTALLATION.md                  # Setup guide
+├── CUSTOMIZATION.md                 # How to modify
+├── STANDALONE_PERSONAS.md           # Persona usage guide
+├── QUICK_REFERENCE.md              # This file
 └── examples/
-    └── EXAMPLE_SESSION.md        # Example walkthrough
+    └── EXAMPLE_SESSION.md          # Example walkthrough
 ```
 
 ## Links

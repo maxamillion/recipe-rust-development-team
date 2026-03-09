@@ -196,56 +196,11 @@ If the task is medium or large:
 1. Execute full workflow starting with PHASE 1
 ```
 
-## Adding MCP Extensions
+## MCP Extensions
 
-### Integrate Rust-Specific Tools
+Goose MCP extensions require tools that implement the MCP (Model Context Protocol) server interface. Standard Rust tools like `cargo`, `clippy`, and `rustfmt` are CLI tools (not MCP servers), but Goose can already invoke them through its built-in shell capabilities. No special extension configuration is needed to use `cargo build`, `cargo test`, `cargo clippy`, or `cargo fmt` within a recipe.
 
-Add extensions for Rust tooling:
-
-```yaml
-extensions:
-  - type: "stdio"
-    name: "rust-analyzer"
-    cmd: "rust-analyzer"
-    description: "Rust language server for code intelligence"
-
-  - type: "stdio"
-    name: "cargo-tools"
-    cmd: "cargo"
-    description: "Cargo build tool for Rust projects"
-    available_tools:
-      - "build"
-      - "test"
-      - "clippy"
-      - "fmt"
-
-  - type: "stdio"
-    name: "miri"
-    cmd: "cargo"
-    args: ["miri"]
-    description: "Miri interpreter for detecting undefined behavior"
-```
-
-Reference in instructions:
-
-```yaml
-**Your responsibilities:**
-# ...
-4. Run `cargo clippy` to catch common mistakes
-5. Use `cargo miri test` to verify undefined behavior safety
-6. Format code with `cargo fmt`
-```
-
-### Add Documentation Tools
-
-```yaml
-extensions:
-  - type: "stdio"
-    name: "cargo-doc"
-    cmd: "cargo"
-    args: ["doc", "--no-deps"]
-    description: "Generate Rust documentation"
-```
+If Rust-specific MCP servers become available in the future, they can be added via the `extensions:` field in the recipe YAML. See the [Goose recipe reference](https://block.github.io/goose/docs/guides/recipes/recipe-reference/) for the extensions syntax.
 
 ## Domain-Specific Customization
 
@@ -372,26 +327,6 @@ Users can choose the variant that matches their needs:
 ```bash
 goose run rust-dev-team-strict.yaml --param task="Production API"
 goose run rust-dev-team-prototype.yaml --param task="Quick POC"
-```
-
-## Advanced: Sub-Recipes
-
-If Goose supports sub-recipes in your version, you can modularize:
-
-```yaml
-sub_recipes:
-  - name: "architect"
-    path: "./personas/architect.yaml"
-  - name: "developer"
-    path: "./personas/developer.yaml"
-  - name: "qa_engineer"
-    path: "./personas/qa.yaml"
-
-instructions: |
-  1. Run architect sub-recipe with task
-  2. Run developer sub-recipe with plan from architect
-  3. Run qa_engineer sub-recipe with implementation
-  # ...
 ```
 
 ## Testing Your Customizations
